@@ -852,10 +852,9 @@ require('lazy').setup({
         -- See :h blink-cmp-config-keymap for defining your own keymap
         preset = 'default',
 
-        ['<Tab>'] = { 'select_next', 'fallback' },
-        ['<S-Tab>'] = { 'select_prev', 'fallback' },
+        ['<Down>'] = { 'select_next', 'fallback' },
+        ['<Up>'] = { 'select_prev', 'fallback' },
         ['<Enter>'] = { 'accept', 'fallback' },
-        ['<Space>'] = { 'hide', 'fallback' },
       },
 
       appearance = {

@@ -290,6 +290,8 @@ require('lazy').setup({
     },
   },
 
+  {'m4xshen/autoclose.nvim', opts = {}},
+
   {
     'neanias/everforest-nvim',
     version = false,
@@ -770,6 +772,8 @@ require('lazy').setup({
         'stylua', -- Used to format Lua code
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
+
+      require("autoclose").setup()
 
       require('mason-lspconfig').setup {
         ensure_installed = {}, -- explicitly set to an empty table (Kickstart populates installs via mason-tool-installer)

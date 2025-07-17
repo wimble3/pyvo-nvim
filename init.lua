@@ -854,7 +854,7 @@ require('lazy').setup({
 
         ['<Down>'] = { 'select_next', 'fallback' },
         ['<Up>'] = { 'select_prev', 'fallback' },
-        ['<Enter>'] = { 'accept', 'fallback' },
+        ['<Tab>'] = { 'accept', 'fallback' },
       },
 
       appearance = {

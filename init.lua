@@ -525,6 +525,18 @@ require('lazy').setup({
       'mason-org/mason-lspconfig.nvim',
       'WhoIsSethDaniel/mason-tool-installer.nvim',
 
+      {
+          "SmiteshP/nvim-navbuddy",
+          dependencies = {
+              "SmiteshP/nvim-navic",
+              "MunifTanjim/nui.nvim"
+          },
+          opts = { lsp = { auto_attach = true } },
+          keys = {
+            { '<S-f>', ':Navbuddy', desc = 'Navbuddy', silent = true },
+          }
+      },
+
       -- Useful status updates for LSP.
       { 'j-hui/fidget.nvim',    opts = {} },
 

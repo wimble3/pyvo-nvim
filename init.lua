@@ -183,13 +183,45 @@ vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
 -- Copilot keymaps
+-- vim.keymap.set('n', '<leader>af', function()
+--   require("CopilotChat").toggle()
+-- end, { desc = "CopilotChat Toggle" })
+--
+-- vim.keymap.set('n', '<leader>ar', function()
+--   require("CopilotChat").reset()
+-- end, { desc = "CopilotChat Reset" })
+vim.keymap.set('n', '<leader>ai', function()
+  require("CopilotChat").open()
+end, { desc = "CopilotChat [i]nit" })
+
+vim.keymap.set('v', '<leader>ac', function()
+  require("CopilotChat").ask("Прокомментируй этот код", {
+    selection = require("CopilotChat.select").visual
+  })
+end, { desc = "CopilotChat [c]omment code" })
+
 vim.keymap.set('n', '<leader>af', function()
   require("CopilotChat").toggle()
-end, { desc = "CopilotChat Toggle" })
+end, { desc = "CopilotChat [f]ocus" })
 
 vim.keymap.set('n', '<leader>ar', function()
   require("CopilotChat").reset()
-end, { desc = "CopilotChat Reset" })
+end, { desc = "CopilotChat [r]eset" })
+
+vim.keymap.set('n', '<leader>aq', function()
+  local input = vim.fn.input("Quick Chat: ")
+  if input ~= "" then
+    require("CopilotChat").ask(input, {
+      selection = require("CopilotChat.select").buffer
+    })
+  end
+end, { desc = "CopilotChat [q]uick chat" })
+
+vim.keymap.set('v', '<leader>as', function()
+  require("CopilotChat").ask("Вставить выделенный текст", {
+    selection = require("CopilotChat.select").visual
+  })
+end, { desc = "CopilotChat [s]elect current text and paste to chat" })
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which

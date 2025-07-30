@@ -181,15 +181,6 @@ vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 -- Diagnostic keymaps
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
-
--- Copilot keymaps
--- vim.keymap.set('n', '<leader>af', function()
---   require("CopilotChat").toggle()
--- end, { desc = "CopilotChat Toggle" })
---
--- vim.keymap.set('n', '<leader>ar', function()
---   require("CopilotChat").reset()
--- end, { desc = "CopilotChat Reset" })
 vim.keymap.set('n', '<leader>ai', function()
   require("CopilotChat").open()
 end, { desc = "CopilotChat [i]nit" })

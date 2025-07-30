@@ -182,6 +182,15 @@ vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 -- Diagnostic keymaps
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
+-- Copilot keymaps
+vim.keymap.set('n', '<leader>af', function()
+  require("CopilotChat").toggle()
+end, { desc = "CopilotChat Toggle" })
+
+vim.keymap.set('n', '<leader>ar', function()
+  require("CopilotChat").reset()
+end, { desc = "CopilotChat Reset" })
+
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
 -- is not what someone will guess without a bit more experience.
@@ -301,6 +310,21 @@ require('lazy').setup({
   },
 
   {'m4xshen/autoclose.nvim', opts = {}},
+
+  {
+    {
+      "CopilotC-Nvim/CopilotChat.nvim",
+      dependencies = {
+        { "github/copilot.vim" }, -- or zbirenbaum/copilot.lua
+        { "nvim-lua/plenary.nvim", branch = "master" }, -- for curl, log and async functions
+      },
+      build = "make tiktoken",
+      opts = {
+        -- 
+      },
+      -- See Commands section for default commands if you want to lazy load on them
+    },
+  },
 
   {
     'neanias/everforest-nvim',

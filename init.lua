@@ -1117,7 +1117,16 @@ require('lazy').setup({
   --
   --  Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
   { import = 'custom.plugins' },
-  --
+  
+  -- File explorer with tabs support
+  { import = 'custom.neo-tree' },
+  
+  -- Tabs at the top of the window
+  { import = 'custom.bufferline' },
+  
+  -- Configure tabline to always show
+  { 'akinsho/bufferline.nvim', version = '*', dependencies = 'nvim-tree/nvim-web-devicons' },
+  
   -- For additional information with loading, sourcing and examples see `:help lazy.nvim-🔌-plugin-spec`
   -- Or use telescope!
   -- In normal mode type `<space>sh` then write `lazy.nvim-plugin`

@@ -363,6 +363,100 @@ require('lazy').setup({
   },
 
   {
+    'stevearc/aerial.nvim',
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+      "nvim-tree/nvim-web-devicons"
+    },
+    config = function()
+      require('aerial').setup({
+        -- Layout options
+        layout = {
+          default_direction = 'right',
+          width = 30,
+          preserve_equality = true,
+          min_width = 30,
+          max_width = 30,
+        },
+        -- Filter which filetypes to enable
+        filter_kind = {
+          'Class',
+          'Function',
+          'Method',
+          'Interface',
+          'Constructor',
+        },
+        -- Don't open for these filetypes
+        ignore = {
+          filetypes = {
+            'neo-tree',
+            'neo-tree-popup',
+            'packer',
+            'TelescopePrompt',
+            'help',
+            'lspinfo',
+            'man',
+            'checkhealth',
+            'git',
+            'gitcommit',
+            'gitrebase',
+            'markdown',
+            'text',
+            'terminal',
+          },
+          buftypes = {
+            'nofile',
+            'terminal',
+            'quickfix',
+            'prompt',
+          },
+        },
+      })
+
+      -- Function to safely open aerial
+      local function open_aerial()
+        local ft = vim.bo.filetype
+        -- Don't open for certain filetypes
+        if ft == 'neo-tree' or ft == 'neo-tree-popup' or ft == '' then
+          return
+        end
+        
+        -- Only open for files with supported filetypes
+        local supported = {
+          lua = true,
+          python = true,
+          javascript = true,
+          typescript = true,
+          go = true,
+          rust = true,
+          c = true,
+          cpp = true,
+          java = true,
+          -- Add other filetypes as needed
+        }
+        
+        if not supported[ft] then
+          return
+        end
+        
+        -- Save current window and open aerial
+        local current_win = vim.api.nvim_get_current_win()
+        vim.cmd('AerialOpen right')
+        vim.api.nvim_set_current_win(current_win)
+      end
+      
+      -- Open aerial when opening a buffer
+      vim.api.nvim_create_autocmd('BufEnter', {
+        pattern = '*',
+        callback = function()
+          -- Small delay to let the buffer load
+          vim.defer_fn(open_aerial, 10)
+        end,
+      })
+    end,
+  },
+
+  {
     {
       "alexpasmantier/pymple.nvim",
       dependencies = {

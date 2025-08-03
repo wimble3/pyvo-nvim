@@ -51,7 +51,9 @@ return {
       },
       window = {
         position = 'left',
-        width = 30,
+        width = 40,
+        auto_expand_width = false,
+        preserve_window_proportions = false,
         mappings = {
           ['<cr>'] = 'open',
           ['t'] = 'open_tabnew',

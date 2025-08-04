@@ -257,6 +257,39 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
+vim.api.nvim_create_autocmd({"CursorMoved", "CursorMovedI", "BufEnter"}, {
+  callback = function()
+    local filename = vim.fn.expand('%:t')  -- Получаем имя файла
+    local func_name = ""
+
+    if vim.bo.filetype == "python" then
+      local line_num = vim.fn.line('.')
+      local found_def = false
+
+      for i = line_num, 1, -1 do
+        local line = vim.fn.getline(i)
+        if line:match('^%s*def%s+([%w_]+)%(') then
+          func_name = line:match('^%s*def%s+([%w_]+)%(')
+          found_def = true
+          break
+        end
+      end
+
+      if not found_def then
+        local line = vim.fn.getline('.')
+        if line:match('^%s*def%s+([%w_]+)%(') then
+          func_name = line:match('^%s*def%s+([%w_]+)%(')
+        end
+      end
+    end
+
+    vim.opt.statusline = "%f | Function: "..func_name.." %="
+  end
+})
+
+-- Устанавливаем минимальную высоту командной строки
+vim.opt.cmdheight = 1
+
 vim.api.nvim_create_autocmd("FileType", {
   pattern = { "javascript", "typescript", "javascriptreact", "typescriptreact" },
   callback = function()

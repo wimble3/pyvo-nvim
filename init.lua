@@ -608,6 +608,7 @@ require('lazy').setup({
       end
     end,
   },
+  {
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
     main = 'nvim-treesitter.configs',
